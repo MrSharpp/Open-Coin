@@ -61,10 +61,10 @@ class Blockchain{
     }
 }
 
-let amirCoin = new Blockchain();
+let openCoin = new Blockchain();
 console.log("Mining Block 1...");
-amirCoin.addBlock(new Block(1, "10/01/2022", {amoount: 4}));
+openCoin.addBlock(new Block(1, "10/01/2022", {amoount: 4}));
 console.log("Mining Block 2...");
-amirCoin.addBlock(new Block(2, "12/01/2022", {amoount: 4}));
+openCoin.addBlock(new Block(2, "12/01/2022", {amoount: 4}));
 
 
