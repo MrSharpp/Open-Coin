@@ -1,17 +1,18 @@
 const {Blockchain, Transaction} = require('./Blockchain');
+const EC = require('elliptic').ec;
+const ec = new EC('secp256k1');
+
+const myKey = ec.keyFromPrivate('3318c44798cad669141bc7a3c3a66fc0407bb90442c1c38a6a2c39bea13b9a24');
+const myWalletAddress = myKey.getPublic('hex');
 
 let openCoin = new Blockchain();
-openCoin.createTransaction(new Transaction("addres1", "address2", 50));
-openCoin.createTransaction(new Transaction("addres2", "address1", 150));
 
-openCoin.minePendingTransactions('nick-address');
-console.log("\n Balance of nick is", openCoin.getBalanceOfAddress('nick-address'));
+console.log("\n Balance of nick is", openCoin.getBalanceOfAddress(myWalletAddress));
 
-openCoin.minePendingTransactions('nick-address');
-console.log("\n Balance of nick is", openCoin.getBalanceOfAddress('nick-address'));
+const tx1 = new Transaction(myWalletAddress, 'publickey', 20);
+tx1.signTransaction(myKey);
+openCoin.addTransaction(tx1);
 
-openCoin.minePendingTransactions('nick-address');
-console.log("\n Balance of nick is", openCoin.getBalanceOfAddress('nick-address'));
+openCoin.minePendingTransactions(myWalletAddress);
 
-openCoin.minePendingTransactions('nick-address');
-console.log("\n Balance of nick is", openCoin.getBalanceOfAddress('nick-address'));
+console.log("\n Balance of nick is", openCoin.getBalanceOfAddress(myWalletAddress));
